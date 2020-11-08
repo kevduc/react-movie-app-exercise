@@ -1,12 +1,13 @@
 import React from "react";
+import _ from "lodash";
 
 const Pagination = (props) => {
   const { itemsCount, pageSize, currentPage, onPageChange } = props;
-  const numPages = Math.ceil(itemsCount / pageSize);
+  const pagesCount = Math.ceil(itemsCount / pageSize);
 
-  if (currentPage > numPages) onPageChange(numPages);
+  if (pagesCount <= 1) return null;
 
-  if (numPages === 1) return null;
+  const pages = _.range(1, pagesCount + 1);
 
   return (
     <nav aria-label="Page navigation">
@@ -22,19 +23,17 @@ const Pagination = (props) => {
             Previous
           </button>
         </li>
-        {[...Array(numPages).keys()]
-          .map((i) => i + 1)
-          .map((i) => (
-            <li key={i} className={`page-item ${i === currentPage ? "active" : ""}`}>
-              <button onClick={() => onPageChange(i)} className="page-link">
-                {i}
-              </button>
-            </li>
-          ))}
-        <li key="Next" className={`page-item ${currentPage === numPages ? "disabled" : ""}`}>
+        {pages.map((pageNumber) => (
+          <li key={pageNumber} className={`page-item ${pageNumber === currentPage ? "active" : ""}`}>
+            <button onClick={() => onPageChange(pageNumber)} className="page-link">
+              {pageNumber}
+            </button>
+          </li>
+        ))}
+        <li key="Next" className={`page-item ${currentPage === pagesCount ? "disabled" : ""}`}>
           <button
             onClick={() => {
-              if (currentPage === numPages) return;
+              if (currentPage === pagesCount) return;
               onPageChange(currentPage + 1);
             }}
             className="page-link">
