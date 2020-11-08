@@ -1,7 +1,8 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 .table {
-  @include font-size(1rem);
+  @include font-size(0.95rem);
+  max-width: max-content;
 }
 
 .table th {
@@ -10,4 +11,16 @@
 
 .no-border {
   border: none;
+}
+
+.star {
+  @include font-size(0.75rem);
+}
+
+.darkgold {
+  color: $yellow-600;
+}
+
+.deleteButton {
+  @include font-size(0.8rem);
 }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 
-function Like(props) {
+const Like = (props) => {
   return (
     <button className={`btn no-border ${props.className ? props.className : ""}`} onClick={props.onClick}>
       {props.liked ? (
@@ -14,6 +14,6 @@ function Like(props) {
       )}
     </button>
   );
-}
+};
 
 export default Like;
