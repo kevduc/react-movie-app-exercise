@@ -3,7 +3,7 @@ import Movies from "./components/Movies";
 
 function App() {
   return (
-    <main className="container mt-5 d-flex justify-content-center">
+    <main className="container mt-4 d-flex justify-content-center">
       <Movies />
     </main>
   );

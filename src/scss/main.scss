@@ -1,26 +1,29 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-.table {
-  @include font-size(0.95rem);
+.mw-max-content {
   max-width: max-content;
-}
-
-.table th {
-  @include font-size(1.1rem);
-}
-
-.no-border {
-  border: none;
-}
-
-.star {
-  @include font-size(0.75rem);
 }
 
 .darkgold {
   color: $yellow-600;
 }
 
+.no-border {
+  border: none;
+}
+
+.table {
+  // @include font-size(0.95rem);
+}
+
+.table th {
+  // @include font-size(1.1rem);
+}
+
+.star {
+  // @include font-size(0.75rem);
+}
+
 .deleteButton {
-  @include font-size(0.8rem);
+  // @include font-size(0.8rem);
 }
