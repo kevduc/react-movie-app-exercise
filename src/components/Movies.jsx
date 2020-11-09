@@ -12,6 +12,7 @@ import { paginate } from "../utils/paginate";
 
 import { getGenres } from "../services/fakeGenreService";
 import ListGroup from "./common/ListGroup";
+import MoviesTable from "./MoviesTable";
 
 class Movies extends Component {
   state = { movies: [], genres: [], selectedGenre: null, pageSize: 4, currentPage: 1 };
@@ -54,6 +55,14 @@ class Movies extends Component {
     this.setState({ movies, currentPage });
   };
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
+
+  handleGenreChange = (genre) => {
+    this.setState({ selectedGenre: genre, currentPage: 1 });
+  };
+
   render() {
     const { movies: allMovies, genres, selectedGenre, pageSize, currentPage } = this.state;
 
@@ -74,59 +83,7 @@ class Movies extends Component {
         </div>
         <div className="d-flex flex-column align-items-stretch">
           <p className="h3 text-nowrap">Showing {numberOfMovies} movies in the database.</p>
-          <table className="table table-hover mt-5 align-middle text-center">
-            <thead>
-              <tr>
-                <th scope="col" className="text-left">
-                  Title
-                </th>
-                <th scope="col">Genre</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Rating</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {moviesOnPage.map((movie) => (
-                <tr key={movie._id}>
-                  <td className="text-left text-nowrap">{movie.title}</td>
-                  <td>{movie.genre.name}</td>
-                  <td>{movie.numberInStock}</td>
-                  <td>
-                    {
-                      <StarRating
-                        className="star darkgold"
-                        //hideEmpty={true}
-                        rating={movie.dailyRentalRate}
-                        maxRating={5}
-                        //className="star"
-                      />
-                    }
-                  </td>
-                  <td>
-                    <Like
-                      className=""
-                      liked={movie.liked}
-                      //color="black"
-                      //colorLiked="red"
-                      onClick={() => {
-                        this.handleLike(movie._id);
-                      }}
-                    />
-                  </td>
-                  <td>
-                    <DeleteButton
-                      className="deleteButton btn-sm"
-                      onClick={() => {
-                        this.handleDelete(movie._id);
-                      }}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <MoviesTable movies={moviesOnPage} onLike={this.handleLike} onDelete={this.handleDelete} />
           <Pagination
             onPageChange={this.handlePageChange}
             itemsCount={numberOfMovies}
