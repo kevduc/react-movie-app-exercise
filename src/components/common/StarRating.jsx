@@ -1,8 +1,8 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as emptyStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as fullStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as emptyStar } from "@fortawesome/free-regular-svg-icons";
 import { faStarHalf as halfStarNoBorder } from "@fortawesome/free-solid-svg-icons";
 import { faStarHalfAlt as halfStarBorder } from "@fortawesome/free-solid-svg-icons";
 

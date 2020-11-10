@@ -11,7 +11,7 @@ import ListGroup from "./common/ListGroup";
 import MoviesTable from "./MoviesTable";
 
 class Movies extends Component {
-  state = { movies: [], genres: [], selectedGenre: null, pageSize: 4, currentPage: 1 };
+  state = { movies: null, genres: null, selectedGenre: null, pageSize: 4, currentPage: 1, sortBy: null, sortOrder: null };
 
   componentDidMount() {
     const genreAny = { _id: null, name: "All Genres" };
@@ -50,23 +50,27 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (column) => {
-    const compareFunciton = {};
+  handleSort = (sortBy) => {
+    const sortOrder = sortBy === this.state.sortBy ? { asc: "desc", desc: "asc" }[this.state.sortOrder] : "asc";
 
-    const movies = this.state.movies.sort(compareFunciton[column]);
-    this.setState({ movies });
+    let sortedMovies = _(this.state.movies).sortBy("_id").sortBy(sortBy).value();
+    if (sortOrder === "desc") sortedMovies = _.reverse(sortedMovies);
+
+    this.setState({ movies: sortedMovies, sortBy, sortOrder });
   };
 
   render() {
-    const { movies: allMovies, genres, selectedGenre, pageSize, currentPage } = this.state;
+    const { movies: allMovies, genres, selectedGenre, pageSize, currentPage, sortBy, sortOrder } = this.state;
 
-    if (genres.length === 0) return <p className="h3 text-nowrap">Loading...</p>;
+    if (allMovies === null || genres === null) return <p className="h3 text-nowrap">Loading...</p>;
 
     const filteredMovies = selectedGenre?._id ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id) : allMovies;
 
-    const numberOfMovies = filteredMovies.length;
+    const processedMovies = filteredMovies;
 
-    let moviesOnPage = paginate(filteredMovies, currentPage, pageSize);
+    const numberOfMovies = processedMovies.length;
+
+    let moviesOnPage = paginate(processedMovies, currentPage, pageSize);
 
     // if (numberOfMovies === 0) return <p className="h3">There are no movies in the database.</p>;
 
@@ -78,7 +82,14 @@ class Movies extends Component {
           </div>
           <div className="col d-flex flex-column align-items-stretch">
             <p className="h3 mb-4">Showing {numberOfMovies} movies in the database.</p>
-            <MoviesTable movies={moviesOnPage} onLike={this.handleLike} onDelete={this.handleDelete} onSort={this.handleSort} />
+            <MoviesTable
+              movies={moviesOnPage}
+              onLike={this.handleLike}
+              onDelete={this.handleDelete}
+              onSort={this.handleSort}
+              sortBy={sortBy}
+              sortOrder={sortOrder}
+            />
             <Pagination
               onPageChange={this.handlePageChange}
               itemsCount={numberOfMovies}

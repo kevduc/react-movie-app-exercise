@@ -3,28 +3,33 @@ import React from "react";
 import Like from "./common/Like";
 import StarRating from "./common/StarRating";
 import DeleteButton from "./common/DeleteButton";
+import SortingTableHeader from "./common/SortingTableHeader";
 
 const MoviesTable = (props) => {
-  const { movies, onLike, onDelete, onSort } = props;
+  const { movies, onLike, onDelete, onSort, sortBy, sortOrder } = props;
+
   return (
-    <div className="table-responsive">
+    <div className="table-responsive text-nowrap">
       <table className="table table-hover align-middle text-center mw-max-content">
         <thead>
           <tr>
-            <th onClick={() => onSort("title")} scope="col" className="text-left">
-              Title
-            </th>
-            <th onClick={() => onSort("genre.name")} scope="col">
-              Genre
-            </th>
-            <th onClick={() => onSort("numberInStock")} scope="col">
-              Stock
-            </th>
-            <th onClick={() => onSort("dailyRentalRate")} scope="col">
-              Rating
-            </th>
-            <th onClick={() => onSort("liked")} scope="col"></th>
-            <th scope="col"></th>
+            {[
+              { name: "Title", value: "title" },
+              { name: "Genre", value: "genre.name" },
+              { name: "Stock", value: "numberInStock" },
+              { name: "Rating", value: "dailyRentalRate" },
+              { name: "Liked", value: "liked" },
+            ].map(({ name, value }) => (
+              <SortingTableHeader
+                key={name}
+                sortOrder={sortBy === value ? sortOrder : null}
+                onSort={() => onSort(value)}
+                scope="col"
+                className={value === "Title" ? "text-left" : ""}>
+                {name}
+              </SortingTableHeader>
+            ))}
+            <th key="Delete" scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +73,11 @@ const MoviesTable = (props) => {
       </table>
     </div>
   );
+};
+
+MoviesTable.defaultProps = {
+  sortBy: null,
+  sortOrder: null,
 };
 
 export default MoviesTable;
