@@ -11,12 +11,33 @@ import ListGroup from "./common/ListGroup";
 import MoviesTable from "./MoviesTable";
 
 class Movies extends Component {
-  state = { movies: null, genres: null, selectedGenre: null, pageSize: 4, currentPage: 1, sortBy: null, sortOrder: null };
+  state = {
+    movies: null,
+    genres: null,
+    selectedGenre: null,
+    pageSize: 4,
+    currentPage: 1,
+    headers: [
+      { name: "Title", property: "title" },
+      { name: "Genre", property: "genre.name" },
+      { name: "Stock", property: "numberInStock" },
+      { name: "Rating", property: "dailyRentalRate" },
+      { name: "Liked", property: "liked" },
+    ],
+    sortColumn: { property: "title", order: "asc" },
+  };
+
+  static sort(movies, sortColumn) {
+    let sortedMovies = _(movies).sortBy("title").sortBy(sortColumn.property).value();
+    if (sortColumn.order === "desc") sortedMovies = _.reverse(sortedMovies);
+    return sortedMovies;
+  }
 
   componentDidMount() {
     const genreAny = { _id: null, name: "All Genres" };
     const genres = [genreAny, ...getGenres()];
-    this.setState({ movies: getMovies(), genres, selectedGenre: genreAny });
+    const movies = Movies.sort(getMovies(), this.state.sortColumn);
+    this.setState({ movies, genres, selectedGenre: genreAny });
   }
 
   handleLike = (movieId) => {
@@ -50,21 +71,17 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (sortBy) => {
-    const sortOrder = sortBy === this.state.sortBy ? { asc: "desc", desc: "asc" }[this.state.sortOrder] : "asc";
-
-    let sortedMovies = _(this.state.movies).sortBy("_id").sortBy(sortBy).value();
-    if (sortOrder === "desc") sortedMovies = _.reverse(sortedMovies);
-
-    this.setState({ movies: sortedMovies, sortBy, sortOrder });
+  handleSort = (sortColumn) => {
+    const movies = Movies.sort(this.state.movies, sortColumn);
+    this.setState({ movies, sortColumn });
   };
 
   render() {
-    const { movies: allMovies, genres, selectedGenre, pageSize, currentPage, sortBy, sortOrder } = this.state;
+    const { movies, headers, genres, selectedGenre, pageSize, currentPage, sortColumn } = this.state;
 
-    if (allMovies === null || genres === null) return <p className="h3 text-nowrap">Loading...</p>;
+    if (movies === null || genres === null) return <p className="h3 text-nowrap">Loading...</p>;
 
-    const filteredMovies = selectedGenre?._id ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id) : allMovies;
+    const filteredMovies = selectedGenre?._id ? movies.filter((movie) => movie.genre._id === selectedGenre._id) : movies;
 
     const processedMovies = filteredMovies;
 
@@ -84,11 +101,11 @@ class Movies extends Component {
             <p className="h3 mb-4">Showing {numberOfMovies} movies in the database.</p>
             <MoviesTable
               movies={moviesOnPage}
+              headers={headers}
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
-              sortBy={sortBy}
-              sortOrder={sortOrder}
+              sortColumn={sortColumn}
             />
             <Pagination
               onPageChange={this.handlePageChange}
