@@ -1,43 +1,18 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 import Like from "./common/Like";
 import StarRating from "./common/StarRating";
 import DeleteButton from "./common/DeleteButton";
-import SortingColumnHeader from "./common/SortingColumnHeader";
+import TableHeader from "./common/TableHeader";
 
 class MoviesTable extends Component {
-
-  sortBy = (property) => {
-    const sortColumn = { ...this.props.sortColumn };
-    if (property === sortColumn.property) {
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      sortColumn.property = property;
-      sortColumn.order = "asc";
-    }
-
-    this.props.onSort(sortColumn);
-  };
-
   render() {
-    const { movies, headers, onLike, onDelete, sortColumn } = this.props;
+    const { movies, columns, onLike, onDelete, onSort, sortColumn } = this.props;
     return (
       <div className="table-responsive text-nowrap">
         <table className="table table-hover align-middle text-center mw-max-content">
-          <thead>
-            <tr>
-              {headers.map(({ name, property }) => (
-                <SortingColumnHeader
-                  key={name}
-                  sortOrder={property === sortColumn.property ? sortColumn.order : null}
-                  onClick={() => this.sortBy(property)}
-                  scope="col">
-                  {name}
-                </SortingColumnHeader>
-              ))}
-              <th key="Delete" scope="col"></th>
-            </tr>
-          </thead>
+          <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} />
           <tbody>
             {movies.map((movie) => (
               <tr key={movie._id}>
@@ -82,8 +57,6 @@ class MoviesTable extends Component {
   }
 }
 
-MoviesTable.defaultProps = {
-  sortColumn: { property: null, order: null },
-};
+MoviesTable.defaultProps = {};
 
 export default MoviesTable;

@@ -17,7 +17,7 @@ class Movies extends Component {
     selectedGenre: null,
     pageSize: 4,
     currentPage: 1,
-    headers: [
+    columns: [
       { name: "Title", property: "title" },
       { name: "Genre", property: "genre.name" },
       { name: "Stock", property: "numberInStock" },
@@ -73,11 +73,11 @@ class Movies extends Component {
 
   handleSort = (sortColumn) => {
     const movies = Movies.sort(this.state.movies, sortColumn);
-    this.setState({ movies, sortColumn });
+    this.setState({ movies, sortColumn, currentPage: 1 });
   };
 
   render() {
-    const { movies, headers, genres, selectedGenre, pageSize, currentPage, sortColumn } = this.state;
+    const { movies, columns, genres, selectedGenre, pageSize, currentPage, sortColumn } = this.state;
 
     if (movies === null || genres === null) return <p className="h3 text-nowrap">Loading...</p>;
 
@@ -101,11 +101,11 @@ class Movies extends Component {
             <p className="h3 mb-4">Showing {numberOfMovies} movies in the database.</p>
             <MoviesTable
               movies={moviesOnPage}
-              headers={headers}
+              columns={columns}
+              sortColumn={sortColumn}
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
-              sortColumn={sortColumn}
             />
             <Pagination
               onPageChange={this.handlePageChange}
