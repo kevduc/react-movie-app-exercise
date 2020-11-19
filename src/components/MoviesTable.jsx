@@ -27,9 +27,8 @@ class MoviesTable extends Component {
       label: "Liked",
       render: (movie) => (
         <Like
-          className=""
           liked={movie.liked}
-          //color="black"
+          //colorUnliked="black"
           //colorLiked="red"
           onClick={() => {
             this.props.onLike(movie._id);
