@@ -70,20 +70,24 @@ class Movies extends Component {
     this.setState({ movies, sortColumn, currentPage: 1 });
   };
 
+  getPagedData = () => {
+    const { movies, selectedGenre, pageSize, currentPage } = this.state;
+    const filteredMovies = selectedGenre?._id ? movies.filter((movie) => movie.genre._id === selectedGenre._id) : movies;
+    const processedMovies = filteredMovies;
+    const totalMovieCount = processedMovies.length;
+    const moviesOnPage = paginate(processedMovies, currentPage, pageSize);
+
+    return { moviesOnPage, totalMovieCount };
+  };
+
   render() {
     const { movies, genres, selectedGenre, pageSize, currentPage, sortColumn } = this.state;
 
     if (!movies || !genres) return <p className="h3 text-nowrap">Loading...</p>;
 
-    const filteredMovies = selectedGenre?._id ? movies.filter((movie) => movie.genre._id === selectedGenre._id) : movies;
+    const { moviesOnPage, totalMovieCount } = this.getPagedData();
 
-    const processedMovies = filteredMovies;
-
-    const numberOfMovies = processedMovies.length;
-
-    let moviesOnPage = paginate(processedMovies, currentPage, pageSize);
-
-    // if (numberOfMovies === 0) return <p className="h3">There are no movies in the database.</p>;
+    // if (totalMovieCount === 0) return <p className="h3">There are no movies in the database.</p>;
 
     return (
       <div className="container mw-max-content">
@@ -92,17 +96,20 @@ class Movies extends Component {
             <ListGroup items={genres} selectedItem={selectedGenre} onItemSelect={this.handleGenreChange} />
           </div>
           <div className="col d-flex flex-column align-items-stretch">
-            <p className="h3 mb-4">Showing {numberOfMovies} movies in the database.</p>
-            <MoviesTable
-              movies={moviesOnPage}
-              sortColumn={sortColumn}
-              onLike={this.handleLike}
-              onDelete={this.handleDelete}
-              onSort={this.handleSort}
-            />
+            <p className="h3 mb-4">Showing {totalMovieCount} movies in the database.</p>
+
+            <div className="table-responsive text-nowrap">
+              <MoviesTable
+                movies={moviesOnPage}
+                sortColumn={sortColumn}
+                onLike={this.handleLike}
+                onDelete={this.handleDelete}
+                onSort={this.handleSort}
+              />
+            </div>
             <Pagination
               onPageChange={this.handlePageChange}
-              itemsCount={numberOfMovies}
+              itemsCount={totalMovieCount}
               pageSize={pageSize}
               currentPage={currentPage}
             />

@@ -3,8 +3,7 @@ import React, { Component } from "react";
 import Like from "./common/Like";
 import StarRating from "./common/StarRating";
 import DeleteButton from "./common/DeleteButton";
-import TableHeader from "./common/TableHeader";
-import TableBody from "./common/TableBody";
+import Table from "./common/Table";
 
 class MoviesTable extends Component {
   columns = [
@@ -52,15 +51,16 @@ class MoviesTable extends Component {
   ];
 
   render() {
-    const { movies, onSort, sortColumn } = this.props;
+    const { movies, sortColumn, onSort } = this.props;
 
     return (
-      <div className="table-responsive text-nowrap">
-        <table className="table table-hover align-middle text-center mw-max-content">
-          <TableHeader columns={this.columns} onSort={onSort} sortColumn={sortColumn} />
-          <TableBody data={movies} columns={this.columns} />
-        </table>
-      </div>
+      <Table
+        className="table-hover align-middle text-center mw-max-content"
+        data={movies}
+        columns={this.columns}
+        sortColumn={sortColumn}
+        onSort={onSort}
+      />
     );
   }
 }

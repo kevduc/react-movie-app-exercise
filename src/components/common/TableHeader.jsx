@@ -16,7 +16,7 @@ class TableHeader extends Component {
     this.props.onSort(sortColumn);
   };
 
-  getIcon = (column) => {
+  getSortIcon = (column) => {
     const { sortColumn } = this.props;
     if (column.propertyPath !== sortColumn.propertyPath) return faSort;
     else return { asc: faSortDown, desc: faSortUp, null: faSort }[sortColumn.order];
@@ -24,7 +24,7 @@ class TableHeader extends Component {
 
   renderSortIcon = (column) => {
     if (!column.propertyPath) return null;
-    else return <FontAwesomeIcon icon={this.getIcon(column)} className="ml-1 fa-w-18 text-muted" size="sm" />;
+    else return <FontAwesomeIcon icon={this.getSortIcon(column)} className="ml-1 fa-w-18 text-muted" size="sm" />;
   };
 
   render() {
