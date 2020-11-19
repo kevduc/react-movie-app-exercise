@@ -17,19 +17,13 @@ class Movies extends Component {
     selectedGenre: null,
     pageSize: 4,
     currentPage: 1,
-    columns: [
-      { name: "Title", property: "title" },
-      { name: "Genre", property: "genre.name" },
-      { name: "Stock", property: "numberInStock" },
-      { name: "Rating", property: "dailyRentalRate" },
-      { name: "Liked", property: "liked" },
-    ],
-    sortColumn: { property: "title", order: "asc" },
+    sortColumn: { propertyPath: "title", order: "asc" },
   };
 
   static sort(movies, sortColumn) {
-    let sortedMovies = _(movies).sortBy("title").sortBy(sortColumn.property).value();
+    let sortedMovies = _(movies).sortBy("title").sortBy(sortColumn.propertyPath).value();
     if (sortColumn.order === "desc") sortedMovies = _.reverse(sortedMovies);
+    if (sortColumn.propertyPath === "liked") sortedMovies = _.reverse(sortedMovies);
     return sortedMovies;
   }
 
@@ -77,9 +71,9 @@ class Movies extends Component {
   };
 
   render() {
-    const { movies, columns, genres, selectedGenre, pageSize, currentPage, sortColumn } = this.state;
+    const { movies, genres, selectedGenre, pageSize, currentPage, sortColumn } = this.state;
 
-    if (movies === null || genres === null) return <p className="h3 text-nowrap">Loading...</p>;
+    if (!movies || !genres) return <p className="h3 text-nowrap">Loading...</p>;
 
     const filteredMovies = selectedGenre?._id ? movies.filter((movie) => movie.genre._id === selectedGenre._id) : movies;
 
@@ -101,7 +95,6 @@ class Movies extends Component {
             <p className="h3 mb-4">Showing {numberOfMovies} movies in the database.</p>
             <MoviesTable
               movies={moviesOnPage}
-              columns={columns}
               sortColumn={sortColumn}
               onLike={this.handleLike}
               onDelete={this.handleDelete}

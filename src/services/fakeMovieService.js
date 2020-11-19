@@ -16,6 +16,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
     numberInStock: 5,
     dailyRentalRate: 2.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
@@ -23,6 +24,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
     numberInStock: 8,
     dailyRentalRate: 3.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
@@ -30,6 +32,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
     numberInStock: 7,
     dailyRentalRate: 3.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -37,6 +40,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
     numberInStock: 7,
     dailyRentalRate: 3.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
@@ -44,6 +48,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
     numberInStock: 7,
     dailyRentalRate: 3.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181e",
@@ -51,6 +56,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
     numberInStock: 7,
     dailyRentalRate: 4.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181f",
@@ -58,6 +64,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
     numberInStock: 4,
     dailyRentalRate: 3.5,
+    liked: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
@@ -65,6 +72,7 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
     numberInStock: 7,
     dailyRentalRate: 3.5,
+    liked: false,
   },
 ];
 
