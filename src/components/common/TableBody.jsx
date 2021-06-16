@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import _ from "lodash";
+import React, { Component } from 'react'
+import _ from 'lodash'
 
 class TableBody extends Component {
   renderCell = (item, column) => {
-    return column.render ? column.render(item) : _.get(item, column.propertyPath);
-  };
+    return column.render ? column.render(item) : _.get(item, column.propertyPath)
+  }
 
-  createKey = (item, column) => `${item._id}-${column.propertyPath || column.key}`;
+  createKey = (item, column) => `${item._id}-${column.propertyPath || column.key}`
 
   render() {
-    const { data, columns } = this.props;
+    const { data, columns } = this.props
     return (
       <tbody>
         {data.map((item) => (
@@ -20,8 +20,8 @@ class TableBody extends Component {
           </tr>
         ))}
       </tbody>
-    );
+    )
   }
 }
 
-export default TableBody;
+export default TableBody
