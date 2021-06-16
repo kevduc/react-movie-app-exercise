@@ -4,6 +4,10 @@
   max-width: max-content;
 }
 
+.results {
+  max-width: 80ch;
+}
+
 @include media-breakpoint-up(sm) {
   .container {
     padding: 0;

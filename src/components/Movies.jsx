@@ -95,10 +95,10 @@ class Movies extends Component {
           <div className="genre-selection col d-flex flex-column align-items-right mr-3 mb-4 text-center">
             <ListGroup items={genres} selectedItem={selectedGenre} onItemSelect={this.handleGenreChange} />
           </div>
-          <div className="col d-flex flex-column align-items-stretch mw-max-content">
+          <div className="results col d-flex flex-column align-items-stretch">
             <p className="h3 mb-4">Showing {totalMovieCount} movies in the database.</p>
 
-            <div className="table-responsive text-nowrap mw-max-content">
+            <div className="table-responsive text-nowrap">
               <MoviesTable
                 movies={moviesOnPage}
                 sortColumn={sortColumn}
