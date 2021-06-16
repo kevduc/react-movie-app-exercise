@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
-import Like from "./common/Like";
-import StarRating from "./common/StarRating";
-import DeleteButton from "./common/DeleteButton";
-import Table from "./common/Table";
+import Like from './common/Like'
+import StarRating from './common/StarRating'
+import DeleteButton from './common/DeleteButton'
+import Table from './common/Table'
 
 class MoviesTable extends Component {
   columns = [
-    { propertyPath: "title", label: "Title" },
-    { propertyPath: "genre.name", label: "Genre" },
-    { propertyPath: "numberInStock", label: "Stock" },
+    { propertyPath: 'title', label: 'Title' },
+    { propertyPath: 'genre.name', label: 'Genre' },
+    { propertyPath: 'numberInStock', label: 'Stock' },
     {
-      propertyPath: "dailyRentalRate",
-      label: "Rating",
+      propertyPath: 'dailyRentalRate',
+      label: 'Rating',
       render: (movie) => (
         <StarRating
           className="star darkgold"
@@ -23,47 +23,47 @@ class MoviesTable extends Component {
       ),
     },
     {
-      propertyPath: "liked",
-      label: "Liked",
+      propertyPath: 'liked',
+      label: 'Liked',
       render: (movie) => (
         <Like
           liked={movie.liked}
           //colorUnliked="black"
           //colorLiked="red"
           onClick={() => {
-            this.props.onLike(movie._id);
+            this.props.onLike(movie._id)
           }}
         />
       ),
     },
     {
-      key: "delete",
+      key: 'delete',
       render: (movie) => (
         <DeleteButton
           className="deleteButton btn-sm"
           onClick={() => {
-            this.props.onDelete(movie._id);
+            this.props.onDelete(movie._id)
           }}
         />
       ),
     },
-  ];
+  ]
 
   render() {
-    const { movies, sortColumn, onSort } = this.props;
+    const { movies, sortColumn, onSort } = this.props
 
     return (
       <Table
-        className="table-hover align-middle text-center mw-max-content"
+        className="table-hover align-middle text-center"
         data={movies}
         columns={this.columns}
         sortColumn={sortColumn}
         onSort={onSort}
       />
-    );
+    )
   }
 }
 
-MoviesTable.defaultProps = {};
+MoviesTable.defaultProps = {}
 
-export default MoviesTable;
+export default MoviesTable

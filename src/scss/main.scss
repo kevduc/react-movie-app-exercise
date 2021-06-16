@@ -1,7 +1,19 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import '../../node_modules/bootstrap/scss/bootstrap';
 
 .mw-max-content {
   max-width: max-content;
+}
+
+@include media-breakpoint-up(sm) {
+  .container {
+    padding: 0;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .genre-selection {
+    max-width: max-content;
+  }
 }
 
 .darkgold {
@@ -10,20 +22,4 @@
 
 .no-border {
   border: none;
-}
-
-.table {
-  // @include font-size(0.95rem);
-}
-
-.table th {
-  // @include font-size(1.1rem);
-}
-
-.star {
-  // @include font-size(0.75rem);
-}
-
-.deleteButton {
-  // @include font-size(0.8rem);
 }
