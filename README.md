@@ -1,6 +1,7 @@
 # React Exercise - Movie List App
 
-👨‍🏫 Render a list of movies with the associated data (rating, liked, etc.) using React, created as part of exercises from Chapters 3 to 5 in [Mosh](https://codewithmosh.com/)'s Tutorial: [Mastering React](https://codewithmosh.com/p/mastering-react).
+ 🎬 Render a list of movies with the associated data (rating, liked, etc.) using React.  
+ 👨‍🏫 Created as part of exercises from Chapters 3 to 5 in [Mosh](https://codewithmosh.com/)'s Tutorial: [Mastering React](https://codewithmosh.com/p/mastering-react).
 
 👉 Try it here: [kevduc.github.io/react-movie-app-exercise](http://kevduc.github.io/react-movie-app-exercise)
 
