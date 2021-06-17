@@ -1,6 +1,6 @@
 {
-  "name": "vidly",
-  "version": "0.1.0",
+  "name": "react-movie-app-exercise",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -21,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,5 +39,29 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {},
+  "description": "👨‍🏫 Render a list of movies with the associated data (rating, liked, etc.) using React, created as part of exercises from Chapters 3 to 5 in [Mosh](https://codewithmosh.com/)'s Tutorial: [Mastering React](https://codewithmosh.com/p/mastering-react).",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevduc/react-movie-app-exercise.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "tutorial",
+    "movie",
+    "app",
+    "list",
+    "genre",
+    "exercise",
+    "mosh"
+  ],
+  "author": "kevduc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevduc/react-movie-app-exercise/issues"
+  },
+  "homepage": "https://kevduc.github.io/react-movie-app-exercise"
 }
