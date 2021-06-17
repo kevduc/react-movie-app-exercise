@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/react-movie-app-exercise/static/css/main.05256d18.chunk.css",
+    "main.js": "/react-movie-app-exercise/static/js/main.d0453f5a.chunk.js",
+    "main.js.map": "/react-movie-app-exercise/static/js/main.d0453f5a.chunk.js.map",
+    "runtime-main.js": "/react-movie-app-exercise/static/js/runtime-main.5346d5ef.js",
+    "runtime-main.js.map": "/react-movie-app-exercise/static/js/runtime-main.5346d5ef.js.map",
+    "static/js/2.64837a97.chunk.js": "/react-movie-app-exercise/static/js/2.64837a97.chunk.js",
+    "static/js/2.64837a97.chunk.js.map": "/react-movie-app-exercise/static/js/2.64837a97.chunk.js.map",
+    "index.html": "/react-movie-app-exercise/index.html",
+    "static/css/main.05256d18.chunk.css.map": "/react-movie-app-exercise/static/css/main.05256d18.chunk.css.map",
+    "static/js/2.64837a97.chunk.js.LICENSE.txt": "/react-movie-app-exercise/static/js/2.64837a97.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5346d5ef.js",
+    "static/js/2.64837a97.chunk.js",
+    "static/css/main.05256d18.chunk.css",
+    "static/js/main.d0453f5a.chunk.js"
+  ]
+}
